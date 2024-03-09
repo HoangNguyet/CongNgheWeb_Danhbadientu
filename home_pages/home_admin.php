@@ -54,7 +54,7 @@
                                     <td class="text-end">
                                         <a href="#?username=<?= $user['username'] ?>" class="btn btn-primary btn-sm view-details">View Details</a>
                                         <a href="../Users/edit_user.php?username=<?= $user['username'] ?>" class="btn btn-success btn-sm edit-user">Edit User</a>
-                                        <a href="#?username=<?= $user['username'] ?>" class="btn btn-danger btn-sm delete-user">Delete User</a>
+                                        <a href="../Users/delete_User.php?username=<?= $user['username'] ?>" class="btn btn-danger btn-sm delete-user">Delete User</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>

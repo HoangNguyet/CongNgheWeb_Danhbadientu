@@ -1,6 +1,7 @@
 <?php
 require_once ("../../fuc_login.php");
 require_once "../../database.php";
+require_once ("../function_user.php");
 // Lấy thông tin từ user_add.php gửi sang
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
@@ -26,11 +27,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 //    {
 //        die("Kết nối thất bại");
 //    }
-    $conn1 = connectdb();
-    // Tạo câu lệnh sql
-    $sql = "INSERT INTO users (username, password, userrole, employeeid) VALUES ('$name', '$password1', '$role','$id')";
-    // Thực thi câu lệnh sql
-    $result = mysqli_query($conn1, $sql);
+//    $conn1 = connectdb();
+//    // Tạo câu lệnh sql
+//    $sql = "INSERT INTO users (username, password, userrole, employeeid) VALUES ('$name', '$password1', '$role','$id')";
+//    // Thực thi câu lệnh sql
+    $result = addUser($name, $password1, $role, $id);
     if($result){
 //        echo "<script>alert('Thêm thành công');</script>";
         echo "<script>window.location.href = '../../home_pages/home_admin.php';</script>";
