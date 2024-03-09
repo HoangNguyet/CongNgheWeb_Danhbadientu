@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result = mysqli_query($conn, $sql);
     if($result){
         echo "<script>alert('Sửa thành công');</script>";
-        echo "<script>window.location.href = '../../pages/home_admin.php';</script>";
+        echo "<script>window.location.href = '../../home_pages/home_admin.php';</script>";
     }else{
         echo "<script>alert('Sửa thất bại');</script>";
         echo "<script>window.location.href = '../edit_user.php';</script>";

@@ -20,7 +20,7 @@ $userInfor = getUserByUsername($username);
 <body>
 <div class="container-fluid">
     <header>
-        <?php include "../pages/header_admin.php"?>
+        <?php include "../home_pages/header_admin.php" ?>
     </header>
     <main class="mt-3">
         <div class="container">

@@ -13,7 +13,7 @@
 <div class="formlogin">
 
     <div class="form">
-        <form action="../pages/process/login_process.php" method="post">
+        <form action="../home_pages/process/login_process.php" method="post">
             <div class="row justify-content-center text-danger">
                 <h2>Danh bạ Điện Thoại</h2>
             </div>

@@ -32,10 +32,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // Thực thi câu lệnh sql
     $result = mysqli_query($conn1, $sql);
     if($result){
-        echo "<script>alert('Thêm thành công');</script>";
-        echo "<script>window.location.href = '../../pages/home_admin.php';</script>";
+//        echo "<script>alert('Thêm thành công');</script>";
+        echo "<script>window.location.href = '../../home_pages/home_admin.php';</script>";
     }else{
-        echo "<script>alert('Thêm thất bại');</script>";
+//        echo "<script>alert('Thêm thất bại');</script>";
         echo "<script>window.location.href = 'add_user.php';</script>";
     }
 }
