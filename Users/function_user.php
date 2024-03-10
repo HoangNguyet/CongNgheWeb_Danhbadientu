@@ -62,18 +62,6 @@ function deleteUser($username) {
     return $result;
 }
 
-function isUserExist($id) {
-    $conn = connectdb();
-    $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $count = mysqli_fetch_row($result)[0];
-    mysqli_free_result($result);
-    mysqli_stmt_close($stmt);
-    return $count > 0;
-}
 // Lấy toàn bộ thông tin nhân viên
 function getDetailUsers($username)
 {
@@ -87,5 +75,17 @@ function getDetailUsers($username)
     mysqli_free_result($result);
     mysqli_stmt_close($stmt);
     return $user;
+}
+function isUsersExist($username) {
+    $conn = connectdb();
+    $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $count = mysqli_fetch_row($result)[0];
+    mysqli_free_result($result);
+    mysqli_stmt_close($stmt);
+    return $count > 0;
 }
 ?>

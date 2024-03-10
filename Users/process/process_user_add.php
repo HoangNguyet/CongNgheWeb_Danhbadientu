@@ -2,7 +2,7 @@
 require_once ("../../fuc_login.php");
 require_once "../../database.php";
 require_once ("../function_user.php");
-$username = $_GET["usernamelogin"];
+$username = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : '';
 // Lấy thông tin từ user_add.php gửi sang
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -13,18 +13,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id = $_POST['id'];
     // Kiểm tra mật khẩu nhập vào
     if($password1!= $password_confirm){
-        echo "<script>alert('Mật khẩu nhập lại không khớp');</script>";
+        echo "<script>alert('Mật khẩu nhập lại không đúng');</script>";
         header("Location: ../add_user.php?usernamelogin=" . urlencode($username));
         //echo "<script>window.location.href = '../add_user.php';</script>";
+        exit(); // Kết thúc chương trình sau khi chuyển hướng
     }
-    $result = addUser($name, $password1, $role, $id);
-    if($result){
-        header("Location: ../../home_pages/home_admin.php?usernamelogin=" . urlencode($username));
-        //echo "<script>window.location.href = '../../home_pages/home_admin.php';</script>";
+    $user_exists = isUsersExist($name);
+    // Kiểm tra xem người dùng đã tồn tại chưa
+    if($user_exists){
+        echo "<script>alert('Tên người dùng đã tồn tại');</script>";
+        header("Location:../add_user.php?usernamelogin=". urlencode($username));
+        exit(); // Kết thúc chương trình sau khi chuyển hướng
     }else{
-//        echo "<script>alert('Thêm thất bại');</script>";
-        header("Location: add_user.php?usernamelogin=" . urlencode($username));
-        //echo "<script>window.location.href = 'add_user.php';</script>";
+        $result = addUser($name, $password1, $role, $id);
+        header("Location: ../../home_pages/home_admin.php?usernamelogin=" . urlencode($username));
     }
 }
 ?>

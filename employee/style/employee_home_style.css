@@ -20,3 +20,24 @@ table th {
     font-weight: 600;
     background-color: #eeecfd !important;
 }
+.pagination {
+    display: inline-block;  /*đảm bảo các phần tử không bị ngắt dòng*/
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 3px 12px;
+    margin: 10px 5px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a:hover {
+    background-color: #f4f4f4;
+}
+.pagination .active {
+    font-weight: bold;
+    background-color: #589bf3;
+}

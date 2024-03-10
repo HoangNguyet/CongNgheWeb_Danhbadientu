@@ -1,16 +1,43 @@
-.formlogin{
-
+.container-fluid{
+    background-color: #E1AFD1;
 }
 
 .form {
+    background-color: white;
     width: 700px; /* Adjust width as needed */
     padding: 20px; /* Add padding */
     margin: 100px auto;
     /*background-color: #e19c9c;*/
 }
 
-/*img {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*}*/
+body {
+    background-color: #f8f9fa;
+}
+.full {
+    /*background-color: #5ebbce;*/
+    background-color: rgba(227, 220, 220, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100% !important;
+}
+.form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+}
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+.form-group label {
+    font-weight: bold;
+}
+.btn-primary {
+    width: 100%;
+}

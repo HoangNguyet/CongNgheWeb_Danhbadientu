@@ -72,4 +72,31 @@ function getDetailEmployee($id){
     mysqli_stmt_close($stmt);
     return $employee;
 }
+function isEmployeeExist($id) {
+    $conn = connectDB();
+    $sql = "SELECT COUNT(*) FROM employees WHERE employeeid = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $count = mysqli_fetch_row($result)[0];
+    mysqli_free_result($result);
+    mysqli_stmt_close($stmt);
+    return $count > 0;
+}
+function searchEmployees($keyword) {
+    $conn = connectDB();
+    $sql = "SELECT * FROM employees WHERE employeename LIKE ? OR employeeaddress LIKE ?";
+    $keyword = "%$keyword%";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $keyword, $keyword);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $employees = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employeess[] = $row;
+    }
+    mysqli_stmt_free_result($stmt);
+    return $employeess;
+}
 ?>

@@ -24,5 +24,60 @@ function usereditprofile($name, $employeename, $employeeaddress, $employeeemail,
     mysqli_stmt_close($stmt);
     return $result;
 }
+function searchDepartments($keyword) {
+    $conn = connectDB();
+    $sql = "SELECT * FROM departments WHERE departmentname LIKE ? OR departmentaddress LIKE ?";
+    $keyword = "%$keyword%";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $keyword, $keyword);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $departments = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $departments[] = $row;
+    }
+    mysqli_stmt_free_result($stmt);
+    return $departments;
+}
+// Hàm lấy toàn bộ đơn vị
+function getAllDepartment()
+{
+    $conn = connectdb();
+    $sql = "SELECT * FROM departments";
+    $result = mysqli_query($conn, $sql);
+    $users = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $departments[] = $row;
+    }
+    mysqli_free_result($result);
+    return $departments;
+
+}
+function searchEmployees($keyword) {
+    $conn = connectDB();
+    $sql = "SELECT * FROM employees WHERE employeename LIKE ? OR employeeaddress LIKE ?";
+    $keyword = "%$keyword%";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $keyword, $keyword);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $employees = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employeess[] = $row;
+    }
+    mysqli_stmt_free_result($stmt);
+    return $employeess;
+}
+function getAllEmployees()
+{
+    $conn = connectdb();
+    $sql = "SELECT * FROM employees";
+    $result = mysqli_query($conn, $sql);
+    $employees = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employees[] = $row;
+    }
+    return $employees;
+}
 
 ?>

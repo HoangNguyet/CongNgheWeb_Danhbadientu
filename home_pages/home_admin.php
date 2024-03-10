@@ -1,7 +1,21 @@
 <?php
     require_once "../Users/function_user.php";
     $users = getAllUser();
-    $name = $_GET['usernamelogin'];
+    $name = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : '';
+    $itemsPerPage = 6;
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+// Đếm số lượng nhân viên
+    $totalUsers = count($users);
+
+// Tính số trang dựa trên số lượng nhân viên và số lượng nhân viên trên mỗi trang
+    $totalPage = ceil($totalUsers / $itemsPerPage);
+
+// Tính chỉ mục bắt đầu và kết thúc của trang hiện tại
+    $startIndex = ($currentPage - 1) * $itemsPerPage;
+    $endIndex = $startIndex + $itemsPerPage;
+
+// Cắt mảng nhân viên để lấy danh sách nhân viên của trang hiện tại
+    $currentPageItems = array_slice($users, $startIndex, $itemsPerPage);
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,12 +37,13 @@
         ?>
     </header>
     <main class="mt-3">
+
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">
                     <div class="overflow-hidden card table-nowrap table-card">
+                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">DANH BẠ ĐIỆN TỬ</h5>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">DANH BẠ ĐIỆN TỬ</h5>
                             <a href="../Users/add_user.php?usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
                         </div>
                         <div class="table-responsive">
@@ -45,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                 <?php $i = 0; ?>
-                                <?php foreach ($users as $user): ?>
+                                <?php foreach ($currentPageItems as $user): ?>
                                 <tr>
                                     <th scope="row"><?= ++$i ?></th>
                                     <td><?php echo $user['username'] ?></td>
@@ -62,6 +77,21 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                        <div class="pagination">
+                            <?php if($currentPage > 1): ?>
+                                <a href="?page=<?php echo $currentPage - 1; ?>&usernamelogin=<?php echo $name; ?>">Previous</a>
+                            <?php endif; ?>
+                            <?php for($i = 1; $i <= $totalPage; $i++): ?>
+                                <?php if($i == $currentPage): ?>
+                                    <span class="active"> <?php echo  $i; ?></span>
+                                <?php else: ?>
+                                    <a href="?page=<?php echo $i; ?>&usernamelogin=<?php echo $name; ?>"><p id="page"><?php echo $i; ?> </p></a>
+                                <?php endif ?>
+                            <?php endfor; ?>
+                            <?php if($currentPage < $totalPage): ?>
+                                <a href="?page=<?php echo $currentPage + 1; ?>&usernamelogin=<?php echo $name; ?>">Next</a>
+                            <?php endif; ?>
                     </div>
                 </div>
             </div>

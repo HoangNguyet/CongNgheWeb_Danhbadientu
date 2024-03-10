@@ -1,8 +1,33 @@
 
 <?php
 require_once "fun_employee.php";
-$employees = getAllEmployees();
-$name = $_GET['usernamelogin'];
+$name = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : ''; // Thêm điều kiện kiểm tra tồn tại
+
+
+// Lấy từ khóa tìm kiếm từ query string
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+
+// Tìm kiếm đơn vị với từ khóa
+if (!empty($keyword)) {
+    $employees = searchEmployees($keyword);
+} else {
+    // Nếu không có từ khóa tìm kiếm, hiển thị tất cả đơn vị
+    $employees = getAllEmployees();
+}
+$itemsPerPage = 6;
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+// Đếm số lượng nhân viên
+$totalEmployees = count($employees);
+
+// Tính số trang dựa trên số lượng nhân viên và số lượng nhân viên trên mỗi trang
+$totalPage = ceil($totalEmployees / $itemsPerPage);
+
+// Tính chỉ mục bắt đầu và kết thúc của trang hiện tại
+$startIndex = ($currentPage - 1) * $itemsPerPage;
+$endIndex = $startIndex + $itemsPerPage;
+
+// Cắt mảng nhân viên để lấy danh sách nhân viên của trang hiện tại
+$currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,9 +54,18 @@ $name = $_GET['usernamelogin'];
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">
                     <div class="overflow-hidden card table-nowrap table-card">
+                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">DANH BẠ NHÂN VIÊN</h5>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">QUẢN LÝ NHÂN VIÊN</h5>
                             <a href="../employee/add_employee.php?usernamelogin=<?= $name?>" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
+                            <form method="GET" action="../employee/Employee_home.php">
+                                <div class="d-flex justify-content-center h-100">
+                                    <div class="search">
+                                        <input class="search_input" type="text" name="keyword" placeholder="Search here..." value="<?= $keyword ?>">
+                                        <input type="hidden" name="usernamelogin" value="<?= $name ?>"> <!-- Thêm input ẩn cho usernamelogin -->
+                                        <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="table-responsive">
                             <table class="table mb-0">
@@ -43,13 +77,14 @@ $name = $_GET['usernamelogin'];
                                     <th>EMPLOYEE EMAIL</th>
                                     <th>PHONE</th>
                                     <th>POSITION</th>
+                                    <th>EMPLOYEE ID</th>
                                     <th>DEPARTMENT ID</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i = 0; ?>
-                                <?php foreach ($employees as $em): ?>
+                                <?php foreach ($currentPageItems as $em): ?>
                                     <tr>
                                         <th scope="row"><?= ++$i ?></th>
                                         <td><?php echo $em['employeename'] ?></td>
@@ -57,6 +92,7 @@ $name = $_GET['usernamelogin'];
                                         <td><?php echo $em['employeeemail'] ?></td>
                                         <td><?php echo $em['phone'] ?></td>
                                         <td><?php echo $em['position'] ?></td>
+                                        <td><?php echo $em['employeeid']?></td>
                                         <td><?php echo $em['departmentid'] ?></td>
                                         <td class="text-end">
                                             <a href="viewdetail_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm view-details">Xem chi tiết</a>
@@ -68,6 +104,21 @@ $name = $_GET['usernamelogin'];
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="pagination">
+                        <?php if($currentPage > 1): ?>
+                            <a href="?page=<?php echo $currentPage - 1; ?>&usernamelogin=<?php echo $name; ?>">Previous</a>
+                        <?php endif; ?>
+                        <?php for($i = 1; $i <= $totalPage; $i++): ?>
+                            <?php if($i == $currentPage): ?>
+                                <span class="active"> <?php echo  $i; ?></span>
+                            <?php else: ?>
+                                <a href="?page=<?php echo $i; ?>&usernamelogin=<?php echo $name; ?>"><p id="page"><?php echo $i; ?> </p></a>
+                            <?php endif ?>
+                        <?php endfor; ?>
+                        <?php if($currentPage < $totalPage): ?>
+                            <a href="?page=<?php echo $currentPage + 1; ?>&usernamelogin=<?php echo $name; ?>">Next</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

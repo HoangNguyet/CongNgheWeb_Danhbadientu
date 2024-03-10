@@ -10,29 +10,27 @@
     <title>Login_Form</title>
 </head>
 <body>
-<div class="formlogin">
-
+<div class="full">
     <div class="form">
         <form action="../home_pages/process/login_process.php" method="post">
-            <div class="row justify-content-center text-danger">
-                <h2>DANH BẠ ĐIỆN THOẠI ĐẠI HỌC THỦY LỢI</h2>
-            </div>
+            <h2>Login into my Site</h2>
             <div class="form-group">
-                <label for=username">User name</label>
+                <label for="username">Username</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Enter your username">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label" for="exampleCheck1">Bạn chưa có tài khoản?</label>
-                <a href="signin.php">Đăng kí</a>
+            <div class="form-group">
+                <a href="#">Forgot password?</a>
             </div>
-            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
 </div>
+<script type="text/javascript" src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.js" ></script>
+</body>
 <script type="text/javascript" src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.js" ></script>
 </body>
 </html>

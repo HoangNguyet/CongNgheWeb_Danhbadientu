@@ -2,7 +2,7 @@
 
 //require_once ("../fuc_login.php");
 include "function_viewdetail.php";
-$name = $_GET['usernamelogin'];
+$name = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : '';
 $emInfor = getAllDetail($name);
 ?>
 <!doctype html>
@@ -12,6 +12,7 @@ $emInfor = getAllDetail($name);
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../style/footer.css">
     <link rel="stylesheet" href="../style/user_home_style.css">
     <link rel="stylesheet" href="../../boostrap/boostrap/bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <title>Document</title>
@@ -20,7 +21,9 @@ $emInfor = getAllDetail($name);
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">My Profile</a>
+        <a class="nav-link active ms-0" href="home_user.php?usernamelogin=<?= $name ?>" target="__blank">My Profile</a>
+        <a class="nav-link ms-0" href="list_department.php?usernamelogin=<?= $name ?>" target="__blank">Danh Sách Đơn Vị </a>
+        <a class="nav-link ms-0" href="list_employee.php?usernamelogin=<?= $name ?>" target="__blank">Danh Sách Nhân Viên</a>
         <a href="profile.php" class="text-decoration-none text-success ml-auto" onclick="">Tài khoản:<strong><?= $name ?></strong></a>
         <a href="../Login.php" class="btn btn-danger" onclick="">Thoát</a>
     </nav>
@@ -106,6 +109,11 @@ $emInfor = getAllDetail($name);
         </div>
     </div>
 </div>
+<footer>
+    <?php
+    include "../footer.php";
+    ?>
+</footer>
 <script src="../../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

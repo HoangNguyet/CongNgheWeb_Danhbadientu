@@ -2,7 +2,7 @@
 // Bắt đầu phiên
 session_start();
 require_once ("../fuc_login.php");
-$name = $_GET['usernamelogin'];
+$name = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : ''; // Thêm điều kiện kiểm tra tồn tại
 // Thiết lập mặc định cho liên kết đầu tiên
 $_SESSION['active_link'] = 'home';
 // Kiểm tra nếu một liên kết được nhấp vào
@@ -27,13 +27,16 @@ if(isset($_GET['page'])) {
 <body>
 <div class="container-fluid">
     <header>
+        <?php
+            $current_page = basename($_SERVER['PHP_SELF']);
+        ?>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="../home_pages/home_admin.php?page=home&usernamelogin=<?= $name ?>">Trang chủ</a>
-                        <a class="nav-link <?php echo ($_SESSION['active_link'] == 'department') ? 'active' : 'inactive'; ?>" href="../Department/department_home.php?page=department&usernamelogin=<?= $name ?>">Quản lý Đơn vị</a>
-                        <a class="nav-link <?php echo ($_SESSION['active_link'] == 'employee') ? 'active' : 'inactive'; ?>" href="../employee/Employee_home.php?usernamelogin=<?= $name ?>" onclick="">Quản lý Nhân viên</a>
+                        <a class="nav-link <?php if($current_page == 'home_admin.php' || $current_page == 'home_admin.php?page=home') echo 'active'; ?>" href="../home_pages/home_admin.php?page=1&usernamelogin=<?= $name ?>">Trang chủ</a>
+                        <a class="nav-link <?php if($current_page == 'department_home.php' || $current_page == 'department_home.php?page=department') echo 'active'; ?>" href="../Department/department_home.php?page=1&usernamelogin=<?= $name ?>">Quản lý Đơn vị</a>
+                        <a class="nav-link <?php if($current_page == 'Employee_home.php' || $current_page == 'Employee_home.php?page=employee') echo 'active'; ?>" href="../employee/Employee_home.php?page=1&usernamelogin=<?= $name ?>" onclick="">Quản lý Nhân viên</a>
 
                     </div>
                 </div>
@@ -43,8 +46,10 @@ if(isset($_GET['page'])) {
                 </div>
             </div>
         </nav>
+
     </header>
 </div>
-<script src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js">
+</script>
 </body>
 </html>

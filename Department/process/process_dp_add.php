@@ -10,9 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //$password_confirm = $_POST['password2'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+
+    // Kểm tra xem đơn vị tôồn tại chưa
+//    $check_exits = isDepartmentExist()
     $result = addDepartment($name, $add, $email, $phone);
     if ($result) {
-        header("Location: ../home_pages/home_admin.php?usernamelogin=" . urlencode($namelogin));
+        header("Location: ../department_home.php?usernamelogin=" . urlencode($namelogin));
     } else {
         header("Location: ../add_department.php?usernamelogin=" . urlencode($namelogin));
     }
