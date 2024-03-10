@@ -12,7 +12,6 @@ function getAllUser()
     }
     mysqli_free_result($result);
     return $users;
-    $conn.close();
 }
 // Lấy thông tin nnguowifdungf theo username
 function getUserByUsername($username)
@@ -27,7 +26,6 @@ function getUserByUsername($username)
     mysqli_free_result($result);
     mysqli_stmt_close($stmt);
     return $user;
-    $conn.close();
 }
 function addUser($name, $password, $role, $id) {
     $conn = connectdb();
@@ -75,7 +73,19 @@ function isUserExist($id) {
     mysqli_free_result($result);
     mysqli_stmt_close($stmt);
     return $count > 0;
-    $conn.close();
 }
-
+// Lấy toàn bộ thông tin nhân viên
+function getDetailUsers($username)
+{
+    $conn = connectdb();
+    $sql = "SELECT e.employeename, d.departmentname,u.username, u.password, u.userrole FROM users u INNER JOIN employees e ON u.employeeid = e.employeeid INNER JOIN departments d ON e.departmentid = d.departmentid WHERE u.username =?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    mysqli_stmt_close($stmt);
+    return $user;
+}
 ?>

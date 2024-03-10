@@ -20,11 +20,3 @@ table th {
     font-weight: 600;
     background-color: #eeecfd !important;
 }
-.active {
-     font-weight: bold;
-     font-size: larger !important;
-    font-style: italic !important;
- }
-.inactive {
-    font-size: medium;
-}

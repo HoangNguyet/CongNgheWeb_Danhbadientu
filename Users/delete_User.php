@@ -1,13 +1,16 @@
 <?php
 require_once "function_user.php";
-$username = $_GET["username"];
-$deleteuser = deleteUser($username);
+$name = $_GET["username"];
+$username = $_GET["usernamelogin"];
+$deleteuser = deleteUser($name);
 if($deleteuser){
     //echo "<script>alert('Xóa thành công');</script>";
-    echo "<script>window.location.href='../home_pages/home_admin.php';</script>";
+    header("Location: ../home_pages/home_admin.php?usernamelogin=" . urlencode($username));
+    //echo "<script>window.location.href='../home_pages/home_admin.php';</script>";
 }
 else{
     echo "<script>alert('Xóa thất bại');</script>";
-    echo "<script>window.location.href='../home_pages/home_admin.php';</script>";
+    header("Location: ../home_pages/home_admin.php?usernamelogin=" . urlencode($username));
+    //echo "<script>window.location.href='../home_pages/home_admin.php';</script>";
 }
 ?>

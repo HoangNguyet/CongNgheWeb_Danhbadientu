@@ -1,6 +1,7 @@
 <?php
     require_once "../Users/function_user.php";
-    $users = getAllUser()
+    $users = getAllUser();
+    $name = $_GET['usernamelogin'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="./style/home_admin_style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../boostrap/boostrap/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>DashBoard</title>
+    <title>HOME ADMIN PAGE</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -27,8 +28,8 @@
                 <div class="col-12 mb-3 mb-lg-5">
                     <div class="overflow-hidden card table-nowrap table-card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Danh bạ điện tử</h5>
-                            <a href="../Users/add_user.php" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
+                            <h5 class="mb-0">DANH BẠ ĐIỆN TỬ</h5>
+                            <a href="../Users/add_user.php?usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table mb-0">
@@ -36,7 +37,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Username</th>
-                                    <th>Password</th>
+<!--                                    <th>Password</th>-->
                                     <th>User_role</th>
                                     <th>Employee_id</th>
                                     <th class="text-end">Action</th>
@@ -48,13 +49,13 @@
                                 <tr>
                                     <th scope="row"><?= ++$i ?></th>
                                     <td><?php echo $user['username'] ?></td>
-                                    <td><?php echo $user['password'] ?></td>
+<!--                                    <td>--><?php //echo $user['password'] ?><!--</td>-->
                                     <td><?php echo $user['userrole'] ?></td>
                                     <td><?php echo $user['employeeid'] ?></td>
                                     <td class="text-end">
-                                        <a href="#?username=<?= $user['username'] ?>" class="btn btn-primary btn-sm view-details">View Details</a>
-                                        <a href="../Users/edit_user.php?username=<?= $user['username'] ?>" class="btn btn-success btn-sm edit-user">Edit User</a>
-                                        <a href="../Users/delete_User.php?username=<?= $user['username'] ?>" class="btn btn-danger btn-sm delete-user">Delete User</a>
+                                        <a href="../Users/viewdetail_user.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-primary btn-sm view-details">View Details</a>
+                                        <a href="../Users/edit_user.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-success btn-sm edit-user">Edit User</a>
+                                        <a href="../Users/delete_User.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-danger btn-sm delete-user">Delete User</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
@@ -67,7 +68,9 @@
         </div>
     </main>
     <footer>
-
+        <?php
+            include "../home_pages/footer.php";
+     ?>
     </footer>
 
 </div>

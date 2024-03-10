@@ -15,7 +15,7 @@
     <div class="form">
         <form action="../home_pages/process/login_process.php" method="post">
             <div class="row justify-content-center text-danger">
-                <h2>Danh bạ Điện Thoại</h2>
+                <h2>DANH BẠ ĐIỆN THOẠI ĐẠI HỌC THỦY LỢI</h2>
             </div>
             <div class="form-group">
                 <label for=username">User name</label>

@@ -1,7 +1,7 @@
 <?php
 // Bắt đầu một phiên
 session_start();
-
+$namelogin = $_GET['usernamelogin'];
 // Khai báo thư viện
 require_once "config.php";
 // Khởi tạo các biê
@@ -12,7 +12,7 @@ $data = $_POST;
 // Nếu đường dẫn là gốc
 if ($url == '/danhbadientu/' || $url == '/danhbadientu') {
     // Chuyển hướng đến trang đăng nhập
-    header("Location: /danhbadientu/home_pages/login.php");
+    header("Location: /danhbadientu/home_pages/login.php?usernamelogin=<?= $namelogin ?>");
     exit();
 }
 ?>

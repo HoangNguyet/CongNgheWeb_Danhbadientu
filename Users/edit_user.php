@@ -1,8 +1,9 @@
 <?php
 require_once "function_user.php";
 //Lấy username từ url
-$username = $_GET["username"];
-$userInfor = getUserByUsername($username);
+$name = $_GET['username'];
+$username = $_GET["usernamelogin"];
+$userInfor = getUserByUsername($name);
 //echo "<pre>";
 //print_r($userInfor);
 //echo "</pre>";
@@ -27,10 +28,10 @@ $userInfor = getUserByUsername($username);
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <h3 class="text-center text-primary mb-4">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h3>
-                    <form action="process/process_user_edit.php" method="post">
+                    <form action="process/process_user_edit.php?usernamelogin=<?= $username ?>&username=<?= $name?>" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Tên người dùng</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $userInfor['username']; ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $userInfor['username']; ?>" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
