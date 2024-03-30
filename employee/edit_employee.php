@@ -4,13 +4,7 @@ require_once "fun_employee.php";
 $id = $_GET["employeeid"];
 $username = $_GET["usernamelogin"];
 $dpInfor = getEmployeeById($id);
-//echo "<pre>";
-//print_r($dpInfor);
-//echo "</pre>";
-
-//echo "<pre>";
-//print_r($userInfor);
-//echo "</pre>";
+$ems = getDepartment();
 
 ?>
 <!doctype html>
@@ -58,8 +52,14 @@ $dpInfor = getEmployeeById($id);
                             <input type="text" class="form-control" id="chucvu" name="chucvu"  value="<?= $dpInfor['position']; ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Mã đơn vị</label>
-                            <input type="text" class="form-control" id="madonvi" name="madonvi"  value="<?= $dpInfor['departmentid']; ?>" required>
+                            <label for="tendonvi" class="form-label">Tên đơn vị</label>
+                            <select class="form-control" id="madonvi" name="madonvi" required>
+                                <?php foreach ($ems as $em): ?>
+                                    <option value="<?= $em['departmentid'] ?>" <?= ($dpInfor['departmentname'] === $em['departmentname']) ? 'selected' : '' ?>>
+                                        <?= $em['departmentname'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Lưu thay đổi</button>

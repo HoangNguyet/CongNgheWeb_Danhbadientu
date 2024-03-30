@@ -1,5 +1,18 @@
 <?php
-$username = $_GET['usernamelogin'];
+//$username = $_GET['usernamelogin'];
+require_once("../database.php");
+$username = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : ''; // Thêm điều kiện kiểm tra tồn tại
+function getEmployeename(){
+    $conn = connectdb();
+    $sql = "SELECT employeename, employeeid FROM employees";
+    $result = mysqli_query($conn, $sql);
+    $departments = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employees[] = $row;
+    }
+    return $employees;
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,30 +32,37 @@ $username = $_GET['usernamelogin'];
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <h3 class="text-center text-primary mb-4">THÊM MỚI TÀI KHOẢN NGƯỜI DÙNG</h3>
+                    <h3 class="text-center text-primary mb-4">ADD NEW USER</h3>
                     <form action="process/process_user_add.php?usernamelogin=<?= $username ?>" method="post">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Tên người dùng</label>
+                            <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password1" class="form-label">Mật khẩu</label>
+                            <label for="password1" class="form-label">PassWord</label>
                             <input type="password" class="form-control" id="password1" name="password1" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password2" class="form-label">Nhập lại mật khẩu</label>
+                            <label for="password2" class="form-label">Repeat Your PassWord</label>
                             <input type="password" class="form-control" id="password2" name="password2" required>
                         </div>
                         <div class="mb-3">
-                            <label for="role" class="form-label">Phân quyền</label>
+                            <label for="role" class="form-label">User Role</label>
                             <input type="text" class="form-control" id="role" name="role" required>
                         </div>
                         <div class="mb-3">
-                            <label for="id" class="form-label">Mã nhân viên</label>
-                            <input type="text" class="form-control" id="id" name="id" required>
+                            <label for="tendonvi" class="form-label">Employee Name</label>
+                            <select class="form-control" id="tendonvi" name="id" required>
+                                <?php
+                                $ems = getEmployeename();
+                                // Lặp qua mảng tên đơn vị và tạo mỗi mục dropdown
+                                foreach ($ems as $em): ?>
+                                    <option value="<?= $em['employeeid'] ?>"><?= $em['employeename'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary">Add New</button>
                         </div>
                     </form>
                 </div>

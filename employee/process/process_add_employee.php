@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $chucvu = $_POST['chucvu'];
-    $madonvi = $_POST['madonvi'];
+    $madonvi = $_POST['tendonvi'];
     $result = addEmployee($name, $add, $email, $phone, $chucvu, $madonvi);
     if ($result) {
         header("Location: ../Employee_home.php?usernamelogin=" . urlencode($namelogin));

@@ -1,14 +1,22 @@
 <?php
 require_once "fun_employee.php";
-$id = $_GET["employeeid"];
-$delete = deleteEmployee($id);
-$username = $_GET['usernamelogin'];
-if($delete){
-    header("Location: employee_home.php?usernamelogin=" . urlencode($username));}
-//echo "<script>window.location.href='../Department/department_home.php';</script>";
-else{
-    echo "<script>alert('Xóa thất bại');</script>";
-    header("Location: employee_home.php?usernamelogin=" . urlencode($username));
-    //echo "<script>window.location.href='../Department/department_home.php';</script>";
+$username = isset($_GET['usernamelogin']) ? $_GET['usernamelogin'] : '';
+
+try {
+    $id = $_GET["employeeid"];
+    $delete = deleteEmployee($id);
+
+    if ($delete) {
+        header("Location: employee_home.php?usernamelogin=" . urlencode($username));
+        exit();
+    } else {
+        throw new Exception("Xóa thất bại");
+    }
+} catch (Exception $e) {
+    // Hiển thị thông báo lỗi
+    echo "<script>alert('Đã xảy ra lỗi khóa ngoại: Bạn không thể xóa được!');</script>";
+    // Chuyển hướng về trang ban đầu
+    echo "<script>window.location.href = document.referrer;</script>";
+    exit();
 }
 ?>

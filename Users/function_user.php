@@ -4,7 +4,7 @@ include "../database.php";
 function getAllUser()
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT users.*, employees.employeename FROM users LEFT JOIN employees ON users.employeeid = employees.employeeid order by created_at desc";
     $result = mysqli_query($conn, $sql);
     $users = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -17,7 +17,7 @@ function getAllUser()
 function getUserByUsername($username)
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM users WHERE username = ?";
+    $sql = "SELECT users.*, employees.employeename FROM users LEFT JOIN employees ON users.employeeid = employees.employeeid WHERE users.username = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "s", $username); // Sửa dòng này lại
     mysqli_stmt_execute($stmt);
@@ -87,5 +87,15 @@ function isUsersExist($username) {
     mysqli_free_result($result);
     mysqli_stmt_close($stmt);
     return $count > 0;
+}
+function getEmployeename(){
+    $conn = connectdb();
+    $sql = "SELECT employeename, employeeid FROM employees";
+    $result = mysqli_query($conn, $sql);
+    $departments = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employees[] = $row;
+    }
+    return $employees;
 }
 ?>

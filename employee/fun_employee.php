@@ -4,7 +4,7 @@ include "../database.php";
 function getAllEmployees()
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM employees";
+    $sql = "SELECT employees.*, departments.departmentname FROM employees JOIN departments ON employees.departmentid = departments.departmentid ORDER BY employees.employeeid DESC";
     $result = mysqli_query($conn, $sql);
     $employees = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -16,7 +16,7 @@ function getAllEmployees()
 function getEmployeeById($id)
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM employees WHERE employeeid =?";
+    $sql = "SELECT employees.*, departments.departmentname FROM employees LEFT JOIN departments ON employees.departmentid = departments.departmentid WHERE employees.employeeid = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
@@ -86,17 +86,27 @@ function isEmployeeExist($id) {
 }
 function searchEmployees($keyword) {
     $conn = connectDB();
-    $sql = "SELECT * FROM employees WHERE employeename LIKE ? OR employeeaddress LIKE ?";
+    $sql = "SELECT employees.*, departments.departmentname FROM employees left join departments on employees.departmentid = departments.departmentid WHERE employeename LIKE ? OR employeeaddress LIKE ? OR departments.departmentname LIKE ?";
     $keyword = "%$keyword%";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ss", $keyword, $keyword);
+    mysqli_stmt_bind_param($stmt, "sss", $keyword, $keyword, $keyword);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $employees = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $employeess[] = $row;
+        $employees[] = $row;
     }
     mysqli_stmt_free_result($stmt);
-    return $employeess;
+    return $employees;
+}
+function getDepartment(){
+    $conn = connectdb();
+    $sql = "SELECT departmentname, departmentid FROM departments";
+    $result = mysqli_query($conn, $sql);
+    $departments = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $departments[] = $row;
+    }
+    return $departments;
 }
 ?>

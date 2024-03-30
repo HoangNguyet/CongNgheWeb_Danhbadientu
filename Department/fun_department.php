@@ -4,9 +4,9 @@ include "../database.php";
 function getAllDepartment()
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM departments";
+    $sql = "SELECT * FROM departments order by departmentid DESC";
     $result = mysqli_query($conn, $sql);
-    $users = array();
+    $departments = array();
     while ($row = mysqli_fetch_assoc($result)) {
         $departments[] = $row;
     }
@@ -88,4 +88,5 @@ function isDepartmentExist($id) {
     mysqli_stmt_close($stmt);
     return $count > 0;
 }
+
 ?>

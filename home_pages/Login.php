@@ -27,6 +27,19 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <div class="form-group">
+            <!--                <p href="#">Access as a guess?</p>-->
+            <div class="row">
+                <div class="col-md-6">
+                    <p href="#">Access as a guess?</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="../home_pages/guess/home_guess.php" class="btn btn-secondary">Access</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.js" ></script>

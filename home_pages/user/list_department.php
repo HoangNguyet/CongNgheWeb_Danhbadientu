@@ -48,7 +48,7 @@ $currentPageItems = array_slice($departments, $startIndex, $itemsPerPage);
     <main class="mt-3">
         <div class="container">
             <nav class="nav nav-borders">
-                <a class="nav-link active ms-0" href="home_user.php?usernamelogin=<?= $name ?>" target="__blank" style="border-bottom: none">Edit</a>
+                <a class="nav-link active ms-0 user" href="home_user.php?usernamelogin=<?= $name ?>" target="__blank" style="border-bottom: none">Edit</a>
             </nav>
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">

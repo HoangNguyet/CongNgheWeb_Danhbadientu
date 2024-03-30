@@ -43,7 +43,7 @@ function searchDepartments($keyword) {
 function getAllDepartment()
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM departments";
+    $sql = "SELECT * FROM departments order by departmentid desc";
     $result = mysqli_query($conn, $sql);
     $users = array();
     while ($row = mysqli_fetch_assoc($result)) {

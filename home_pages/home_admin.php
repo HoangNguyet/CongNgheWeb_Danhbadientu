@@ -42,9 +42,9 @@
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">
                     <div class="overflow-hidden card table-nowrap table-card">
-                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">DANH BẠ ĐIỆN TỬ</h5>
+                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">USERS DIRECTORY</h5>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a href="../Users/add_user.php?usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
+                            <a href="../Users/add_user.php?usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm delete-user">ADD NEW USER</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table mb-0">
@@ -54,7 +54,7 @@
                                     <th>Username</th>
 <!--                                    <th>Password</th>-->
                                     <th>User_role</th>
-                                    <th>Employee_id</th>
+                                    <th>Employee Name</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                                 </thead>
@@ -66,12 +66,13 @@
                                     <td><?php echo $user['username'] ?></td>
 <!--                                    <td>--><?php //echo $user['password'] ?><!--</td>-->
                                     <td><?php echo $user['userrole'] ?></td>
-                                    <td><?php echo $user['employeeid'] ?></td>
+                                    <td><?php echo $user['employeename'] ?></td>
                                     <td class="text-end">
                                         <a href="../Users/viewdetail_user.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-primary btn-sm view-details">View Details</a>
                                         <a href="../Users/edit_user.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-success btn-sm edit-user">Edit User</a>
-                                        <a href="../Users/delete_User.php?usernamelogin=<?= $name ?>&username=<?= $user['username'] ?>" class="btn btn-danger btn-sm delete-user">Delete User</a>
+                                        <a href="#" class="btn btn-danger btn-sm delete-user" onclick="confirmDelete('<?= $user['username'] ?>')">Delete User</a>
                                     </td>
+
                                 </tr>
                                 <?php endforeach;?>
                                 </tbody>
@@ -104,6 +105,21 @@
     </footer>
 
 </div>
+<script>
+    function confirmDelete(username) {
+        // Hiển thị hộp thoại xác nhận
+        var result = confirm("Are you sure you want to delete user '" + username + "'?");
+
+        // Nếu người dùng chọn "OK", tiến hành xóa
+        if (result) {
+            // Redirect hoặc gửi yêu cầu xóa đến server
+            window.location.href = "../Users/delete_User.php?usernamelogin=<?= $name ?>&username=" + username;
+        } else {
+            // Người dùng chọn "Cancel", không làm gì cả
+            return false;
+        }
+    }
+</script>
 
 <script src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>

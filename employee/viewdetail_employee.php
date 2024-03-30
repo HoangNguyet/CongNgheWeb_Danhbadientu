@@ -60,10 +60,10 @@ $emInfor = getDetailEmployee($id);
                                 <input class="form-control" id="inputLocation" type="text" value="<?= $emInfor['departmentname'] ?>">
                             </div>
                             <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Id</label>
-                                <input class="form-control" id="inputLastName" type="text" value="<?= $emInfor['employeeid'] ?>">
-                            </div>
+<!--                            <div class="col-md-6">-->
+<!--                                <label class="small mb-1" for="inputLastName">Id</label>-->
+<!--                                <input class="form-control" id="inputLastName" type="text" value="--><?php //= $emInfor['employeeid'] ?><!--">-->
+<!--                            </div>-->
                         </div>
                         <!-- Form Row        -->
                         <div class="row gx-3 mb-3">

@@ -40,7 +40,7 @@ $currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../boostrap/boostrap/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../home_pages/style/footer.css" rel="stylesheet">
-    <title>HOME DEPARTMENT PAGE</title>
+    <title>HOME EMPLOYEE PAGE</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -54,9 +54,9 @@ $currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">
                     <div class="overflow-hidden card table-nowrap table-card">
-                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">DANH BẠ NHÂN VIÊN</h5>
+                        <h5 class="mb-0 card-header d-flex justify-content-center align-items-center">EMPLOYEES DIRECTORY</h5>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a href="../employee/add_employee.php?usernamelogin=<?= $name?>" class="btn btn-primary btn-sm delete-user">THÊM MỚI</a>
+                            <a href="../employee/add_employee.php?usernamelogin=<?= $name?>" class="btn btn-primary btn-sm delete-user">ADD NEW</a>
                             <form method="GET" action="../employee/Employee_home.php">
                                 <div class="d-flex justify-content-center h-100">
                                     <div class="search">
@@ -74,11 +74,11 @@ $currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
                                     <th>STT</th>
                                     <th>EMPLOYEE NAME</th>
                                     <th>EMPLOYEE ADDRESS</th>
-                                    <th>EMPLOYEE EMAIL</th>
+<!--                                    <th>EMPLOYEE EMAIL</th>-->
                                     <th>PHONE</th>
-                                    <th>POSITION</th>
-                                    <th>EMPLOYEE ID</th>
-                                    <th>DEPARTMENT ID</th>
+<!--                                    <th>POSITION</th>-->
+<!--                                    <th>EMPLOYEE ID</th>-->
+                                    <th>DEPARTMENT NAME</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                                 </thead>
@@ -89,15 +89,17 @@ $currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
                                         <th scope="row"><?= ++$i ?></th>
                                         <td><?php echo $em['employeename'] ?></td>
                                         <td><?php echo $em['employeeaddress'] ?></td>
-                                        <td><?php echo $em['employeeemail'] ?></td>
+<!--                                        <td>--><?php //echo $em['employeeemail'] ?><!--</td>-->
                                         <td><?php echo $em['phone'] ?></td>
-                                        <td><?php echo $em['position'] ?></td>
-                                        <td><?php echo $em['employeeid']?></td>
-                                        <td><?php echo $em['departmentid'] ?></td>
+<!--                                        <td>--><?php //echo $em['position'] ?><!--</td>-->
+<!--                                        <td>--><?php //echo $em['employeeid']?><!--</td>-->
+                                        <td><?php echo $em['departmentname'] ?></td>
                                         <td class="text-end">
-                                            <a href="viewdetail_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm view-details">Xem chi tiết</a>
-                                            <a href="../employee/edit_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-success btn-sm edit-user">Sửa nhân viên</a>
-                                            <a href="../employee/delete_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-danger btn-sm delete-user">Xóa nhân viên</a>
+                                            <a href="viewdetail_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-primary btn-sm view-details">View</a>
+                                            <a href="../employee/edit_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>" class="btn btn-success btn-sm edit-user">Edit</a>
+<!--                                            <a href="../employee/delete_employee.php?employeeid=--><?php //= $em['employeeid'] ?><!--&usernamelogin=--><?php //= $name ?><!--" class="btn btn-danger btn-sm delete-user">Delete</a>-->
+<!--                                            <a href="../employee/delete_employee.php?employeeid=--><?php //= $em['employeeid'] ?><!--&usernamelogin=--><?php //= $name ?><!--" class="btn btn-danger btn-sm delete-user" onclick="return confirmDelete();">Delete</a>-->
+                                            <a href="#" class="btn btn-danger btn-sm delete-user" onclick="return confirmDelete('<?= $em['employeename'] ?>', '<?= $name ?>');">Delete</a>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -131,6 +133,22 @@ $currentPageItems = array_slice($employees, $startIndex, $itemsPerPage);
     </footer>
 
 </div>
+<script>
+    function confirmDelete(username) {
+        // Hiển thị hộp thoại xác nhận
+        var result = confirm("Are you sure you want to delete employee '" + username + "'?");
+
+        // Nếu người dùng chọn "OK", tiến hành xóa
+        if (result) {
+            // Redirect hoặc gửi yêu cầu xóa đến server
+            //window.location.href = "../employee/delete_employee.php?usernamelogin=<?php //= $name ?>//&username=" + username;
+            window.location.href = "../employee/delete_employee.php?employeeid=<?= $em['employeeid'] ?>&usernamelogin=<?= $name ?>";
+        } else {
+            // Người dùng chọn "Cancel", không làm gì cả
+            return false;
+        }
+    }
+</script>
 
 <script src="../boostrap/boostrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>

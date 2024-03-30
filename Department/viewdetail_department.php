@@ -66,12 +66,12 @@ $emInfor = getDepartmentById($id);
                                     <label class="small mb-1" for="inputOrgName">Department Address</label>
                                     <input class="form-control" id="inputOrgName" type="text" value="<?= $emInfor['departmentaddress'] ?>">
                                 </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputEmailAddress">Department email</label>
+                                    <input class="form-control" id="inputEmailAddress" type="email" value="<?= $emInfor['departmentemail'] ?>">
+                                </div>
                             </div>
                             <!-- Form Group (email address)-->
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Department email</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" value="<?= $emInfor['departmentemail'] ?>">
-                            </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (phone number)-->

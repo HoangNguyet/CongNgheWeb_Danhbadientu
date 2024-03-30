@@ -34,15 +34,15 @@ if(isset($_GET['page'])) {
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link <?php if($current_page == 'home_admin.php' || $current_page == 'home_admin.php?page=home') echo 'active'; ?>" href="../home_pages/home_admin.php?page=1&usernamelogin=<?= $name ?>">Trang chủ</a>
-                        <a class="nav-link <?php if($current_page == 'department_home.php' || $current_page == 'department_home.php?page=department') echo 'active'; ?>" href="../Department/department_home.php?page=1&usernamelogin=<?= $name ?>">Quản lý Đơn vị</a>
-                        <a class="nav-link <?php if($current_page == 'Employee_home.php' || $current_page == 'Employee_home.php?page=employee') echo 'active'; ?>" href="../employee/Employee_home.php?page=1&usernamelogin=<?= $name ?>" onclick="">Quản lý Nhân viên</a>
+                        <a class="nav-link <?php if($current_page == 'home_admin.php' || $current_page == 'home_admin.php?page=home') echo 'active'; ?>" href="../home_pages/home_admin.php?page=1&usernamelogin=<?= $name ?>">Home</a>
+                        <a class="nav-link <?php if($current_page == 'department_home.php' || $current_page == 'department_home.php?page=department') echo 'active'; ?>" href="../Department/department_home.php?page=1&usernamelogin=<?= $name ?>">Department Management</a>
+                        <a class="nav-link <?php if($current_page == 'Employee_home.php' || $current_page == 'Employee_home.php?page=employee') echo 'active'; ?>" href="../employee/Employee_home.php?page=1&usernamelogin=<?= $name ?>" onclick="">Employee Management</a>
 
                     </div>
                 </div>
                 <div>
-                    <a href="profile.php" class="text-decoration-none text-success" onclick="">Tài khoản:<strong><?= $name ?></strong></a>
-                    <a href="Login.php" class="btn btn-danger" onclick="">Thoát</a>
+                    <a href="profile.php" class="text-decoration-none text-success right" onclick="">Account:<strong><?= $name ?></strong></a>
+                    <a href="Login.php" class="btn btn-danger right" onclick="">Logout</a>
                 </div>
             </div>
         </nav>
